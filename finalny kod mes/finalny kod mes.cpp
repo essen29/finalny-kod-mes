@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int liczba = 2; 
+int liczba = 3; 
 
 double min(double tablica[], int nN)
 {
@@ -176,9 +176,9 @@ void wczytajDoPliku(grid* siatka, globaldata* data)
 	string smietnik, x, y, ele1, ele2, ele3, ele4;
 
 	ifstream plik;
-	//plik.open("Test1_4_4.txt");
+	plik.open("Test1_4_4.txt");
 	//plik.open("Test2_4_4_MixGrid.txt");
-	plik.open("Test3_31_31_kwadrat.txt");
+	//plik.open("Test3_31_31_kwadrat.txt");
 
 	plik >> smietnik >> data->SimulationTime;
 	plik >> smietnik >> data->SimulationStepTime;
