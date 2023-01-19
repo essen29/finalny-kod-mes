@@ -639,8 +639,8 @@ void oblicz_uklad_rownan(int liczba_rownan, uklad_rownan* uklad, dane* d, grid s
 		d->t0[i] = licznik / uklad->HplusCdT[i][i];
 	}
 
-	cout << endl << "Temperatury dla t = " << step << endl;
-	cout << "Min: " << min(d->t0, siatka.nN) << endl;
+	cout << endl << "Temperatury dla t = " << step << "\t";
+	cout << "Min: " << min(d->t0, siatka.nN) << "\t";
 	cout << "Max: " << max(d->t0, siatka.nN) << endl;
 
 	for (int i = 0; i < siatka.nN; i++)
