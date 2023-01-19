@@ -176,9 +176,9 @@ void wczytajDoPliku(grid* siatka, globaldata* data)
 	string smietnik, x, y, ele1, ele2, ele3, ele4;
 
 	ifstream plik;
-	plik.open("Test1_4_4.txt");
+	//plik.open("Test1_4_4.txt");
 	//plik.open("Test2_4_4_MixGrid.txt");
-	//plik.open("Test3_31_31_kwadrat.txt");
+	plik.open("Test3_31_31_kwadrat.txt");
 
 	plik >> smietnik >> data->SimulationTime;
 	plik >> smietnik >> data->SimulationStepTime;
@@ -288,46 +288,6 @@ void przydzielWagiiPkt(double* punkty, double* wagi)
 		wagi[2] = (18. + sqrt(30.)) / 36.;
 		wagi[3] = (18. - sqrt(30.)) / 36.;
 	}
-}
-
-fun_ksztaltu obliczFunKsztaltu(double* punkty, double* wagi)
-{
-	fun_ksztaltu tmp;
-
-	tmp.tabela_dnPOksi = new double* [liczba * liczba];
-	tmp.tabela_dnPOeta = new double* [liczba * liczba];
-	tmp.tablica_funkcja_ksztaltu = new double* [liczba * 4];
-	tmp.fun_ksztaltu_dlaC = new double* [liczba * liczba];
-
-	for (int i = 0; i < liczba * liczba; i++) //stawianie tablic dynamicznych
-	{
-		tmp.tabela_dnPOksi[i] = new double[5];
-		tmp.tabela_dnPOeta[i] = new double[5];
-		tmp.tablica_funkcja_ksztaltu[i] = new double[4];
-		tmp.fun_ksztaltu_dlaC = new double* [liczba * liczba];
-	}
-
-	for (int j = 0; j < liczba; j++)
-	{
-		for (int i = 0; i < liczba; i++)
-		{
-			tmp.tabela_dnPOksi[j * liczba + i][0] = punkty[(j * liczba + i) / liczba];
-			tmp.tabela_dnPOksi[j * liczba + i][1] = n1odKsi(tmp.tabela_dnPOksi[j * liczba + i][0]);
-			tmp.tabela_dnPOksi[j * liczba + i][2] = n2odKsi(tmp.tabela_dnPOksi[j * liczba + i][0]);
-			tmp.tabela_dnPOksi[j * liczba + i][3] = n3odKsi(tmp.tabela_dnPOksi[j * liczba + i][0]);
-			tmp.tabela_dnPOksi[j * liczba + i][4] = n4odKsi(tmp.tabela_dnPOksi[j * liczba + i][0]);
-
-			//cout << setprecision(4) << "pc" << j * liczba + i + 1 << "\t" << tmp.tabela_dnPOksi[j * liczba + i][0] << "\t" << tmp.tabela_dnPOksi[j * liczba + i][1] << "\t" << tmp.tabela_dnPOksi[j * liczba + i][2] << "\t" << tmp.tabela_dnPOksi[j * liczba + i][3] << "\t" << tmp.tabela_dnPOksi[j * liczba + i][4] << endl;
-			
-			tmp.tabela_dnPOeta[i * liczba + j][0] = punkty[j];
-			tmp.tabela_dnPOeta[i * liczba + j][1] = n1odEta(tmp.tabela_dnPOeta[i * liczba + j][0]);
-			tmp.tabela_dnPOeta[i * liczba + j][2] = n2odEta(tmp.tabela_dnPOeta[i * liczba + j][0]);
-			tmp.tabela_dnPOeta[i * liczba + j][3] = n3odEta(tmp.tabela_dnPOeta[i * liczba + j][0]);
-			tmp.tabela_dnPOeta[i * liczba + j][4] = n4odEta(tmp.tabela_dnPOeta[i * liczba + j][0]);
-		}
-	}
-
-	return tmp;
 }
 
 void zerowanie(uklad_rownan* uklad, dane* d,fun_ksztaltu* funkcje ,grid* siatka, globaldata* data)
@@ -709,8 +669,6 @@ int main()
 	double* wagi = new double[liczba];
 
 	przydzielWagiiPkt(punkty, wagi);
-
-	fun_ksztaltu f_ksztaltu = obliczFunKsztaltu(punkty, wagi);
 	
 	zerowanie(&uklad, &d, &funkcje, &siatka, &data);
 
